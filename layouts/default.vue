@@ -1,0 +1,189 @@
+<script setup>
+const { show, updateShow, updateHide } = useScroll()
+const { menuShow, updateMenuShow, updateMenuHide } = useMenuShow()
+const route = useRoute()
+const nowScroll = ref(0)
+
+function handleScroll(e) {
+  const scrollTop = document.getElementById('pageContent').scrollTop
+  if (nowScroll.value > scrollTop)
+    updateMenuShow()
+
+  else
+    updateMenuHide()
+
+  nowScroll.value = scrollTop
+  const myTop = document.getElementById('pageContent').scrollHeight
+  if (scrollTop > myTop / 10) {
+    updateHide()
+    document.getElementsByClassName('aplayer-title')[0].style.color = '#666'
+    document.getElementsByClassName('aplayer-author')[0].style.color = '#666'
+    document.getElementsByClassName('aplayer-time-narrow')[0].style.color = '#666'
+    document.getElementsByClassName('aplayer-icon-volume-down')[0].firstChild.firstChild.style.fill = '#666'
+  }
+  else {
+    updateShow()
+    document.getElementsByClassName('aplayer-title')[0].style.color = '#fff'
+    document.getElementsByClassName('aplayer-author')[0].style.color = '#fff'
+    document.getElementsByClassName('aplayer-time-narrow')[0].style.color = '#fff'
+    document.getElementsByClassName('aplayer-icon-volume-down')[0].firstChild.firstChild.style.fill = '#fff'
+  }
+}
+onMounted(async () => {
+  initAudio()
+})
+function initAudio() {
+  // 创建一个音乐播放器实例，并挂载到DOM上，同时进行相关配置
+  const ap = new APlayer({
+    container: document.getElementById('aplayer'),
+    listFolded: true,
+    audio: [ // 歌曲列表
+      {
+        name: '星茶会',
+        artist: '灰澈-星茶会',
+        url: 'https://media.inyaw.com/icon/test_music.mp3',
+        cover: 'http://imge.kugou.com/stdmusic/150/20200812/20200812134914113741.jpg',
+        lrc: '',
+        theme: '#baf',
+      },
+    ],
+  })
+}
+const user = useCookie('TOKEN_USER')
+const token = useCookie('TOKEN_KEY')
+const userNav = useState('userNav', () => [])
+userNav.value = [
+  {
+    name: '登录',
+    path: '/login',
+  },
+]
+if (user.value && token.value) {
+  userNav.value = []
+  userNav.value = [
+    {
+      name: '消息',
+      path: '/message',
+    },
+    {
+      name: '设置',
+      path: '/setting',
+    },
+    {
+      name: '登出',
+      path: '/logout',
+    },
+  ]
+}
+if (!user.value && token.value) {
+  const userData = await useFetch('/user/info', {
+    parseResponse: JSON.parse,
+    baseURL: 'https://api.inyaw.com/inyaa-admin',
+    method: 'GET',
+    headers: {
+      Authorization: token.value,
+    },
+  }).then((r) => {
+    if (!r)
+      return {}
+
+    if (!r.data || !r.data.value)
+      return {}
+
+    return r.data.value
+  })
+  if (userData && userData.code === 200) {
+    user.value = userData.data
+    userNav.value = []
+    userNav.value = [
+      {
+        name: '消息',
+        path: '/message',
+      },
+      {
+        name: '设置',
+        path: '/setting',
+      },
+      {
+        name: '登出',
+        path: '/logout',
+      },
+    ]
+  }
+}
+function toLogin() {
+  window.location.href = 'https://api.inyaw.com/inyaa-admin/toLogin'
+}
+
+function toLogout() {
+  token.value = null
+  user.value = null
+  window.location.reload()
+}
+const menuData = await useFetch('/menu/findMenuList', {
+  parseResponse: JSON.parse,
+  baseURL: 'https://api.inyaw.com/inyaa-admin',
+  method: 'GET',
+  params: {
+    enable: true,
+  },
+}).then((r) => {
+  if (!r)
+    return {}
+
+  if (!r.data || !r.data.value)
+    return {}
+
+  if (r.data.value.code && r.data.value.code === 200)
+    return r.data.value.data
+  else
+    return {}
+})
+useHead({
+  link: [
+    { rel: 'icon', href: 'https://media.inyaw.com/icon/favicon.ico' },
+  ],
+})
+</script>
+
+<template>
+  <div class="w-full h-screen grid overflow-hidden">
+    <img :class="[show ? 'fixed w-full h-full object-cover -z-999 bg-[url(https://media.inyaw.com/cover/14db2cf6e4b441368243b23722d212c9.png)] md:bg-[url(https://media.inyaw.com/cover/7037ade43b1e484eac903a111b7ea709.jpg)] bg-no-repeat bg-cover' : 'fixed filter blur-sm w-full h-full object-cover -z-999 bg-[url(https://media.inyaw.com/cover/14db2cf6e4b441368243b23722d212c9.png)] md:bg-[url(https://media.inyaw.com/cover/7037ade43b1e484eac903a111b7ea709.jpg)] bg-no-repeat bg-cover']">
+    <div class="navbar bg-opacity-60 fixed top-0 z-999 bg-white bg-opacity-70" :class="[menuShow ? 'transition duration-500 translate-y-0' : 'transition duration-500 -translate-y-16']">
+      <div class="flex-1">
+        <a class="btn btn-ghost normal-case text-xl">daisyUI</a>
+      </div>
+      <div class="flex-none gap-2">
+        <button class="btn btn-ghost btn-circle">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path
+              stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+            />
+          </svg>
+        </button>
+        <div class="dropdown dropdown-end">
+          <label tabindex="0" class="btn btn-ghost btn-circle avatar">
+            <div class="w-10 rounded-full">
+              <div class="i-carbon-user-avatar w-6 h-6" />
+            </div>
+          </label>
+          <ul tabindex="0" class="mt-3 p-2 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-52">
+            <li>
+              <a class="justify-between">
+                Profile
+                <span class="badge">New</span>
+              </a>
+            </li>
+            <li><a>Settings</a></li>
+            <li><a>Logout</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <main id="pageContent" class="overflow-y-auto" @scroll="handleScroll">
+      <slot />
+      <Footer />
+    </main>
+  </div>
+</template>
