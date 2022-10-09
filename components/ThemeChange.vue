@@ -140,7 +140,7 @@ function updateTheme(val) {
   <div class="ml-4 flex items-center md:ml-6">
     <div title="Change Theme" class="dropdown dropdown-end">
       <div tabindex="0" class="btn btn-ghost gap-1 normal-case">
-        <div class="i-heroicons-outline-color-swatch w-6 h-6" />
+        <div class="i-heroicons-swatch w-6 h-6 text-black" />
       </div>
       <div
         class="scrollbar dropdown-content rounded-t-box rounded-b-box top-px mt-16 h-[70vh] max-h-96 w-52 overflow-y-auto bg-base-200 text-base-content shadow-2xl"

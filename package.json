@@ -15,6 +15,7 @@
     "@iconify-json/heroicons": "^1.1.2",
     "@iconify-json/twemoji": "^1.1.5",
     "@nuxtjs/tailwindcss": "^5.3.3",
+    "@tailwindcss/typography": "^0.5.7",
     "@unocss/nuxt": "^0.45.23",
     "daisyui": "^2.31.0",
     "eslint": "^8.24.0",

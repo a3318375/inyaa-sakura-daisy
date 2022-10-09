@@ -1,7 +1,7 @@
 <script setup>
 const nuxtApp = useNuxtApp()
 const { blogNum } = useBlogNum()
-const { menuShow } = useMenuShow()
+const { myInfoShow } = useMyInfoShow()
 const route = useRoute()
 let pageNum = 0
 let maxPage = 1
@@ -150,7 +150,7 @@ useHead({
           </div>
         </div>
         <div class="hidden lg:block lg:col-start-9 lg:col-end-12 lg:pl-0.75">
-          <div class="w-full px-6 py-5 bg-white shadow-md rounded-xl">
+          <div id="myInfo" class="w-full px-6 py-5 bg-primary-content opacity-80 shadow-md rounded-xl">
             <div class="flex justify-center">
               <img src="https://media.inyaw.com/icon/avatar.png!inyaa" class="rounded-full w-32">
             </div>
@@ -175,8 +175,8 @@ useHead({
               </div>
             </div>
           </div>
-          <div class="w-full sticky top-5" :class="[menuShow ? 'transition duration-500 translate-y-16' : 'transition duration-500 -translate-y-0']">
-            <div class="sticky px-6 py-5 bg-white shadow-md rounded-xl mt-5">
+          <div class="w-full" :class="[myInfoShow ? 'sticky top-5' : '']">
+            <div class="sticky px-6 py-5 bg-primary-content opacity-80 shadow-md rounded-xl mt-5">
               <div>最近文章</div>
             </div>
           </div>
