@@ -23,7 +23,7 @@ jobs:
         name: Build & push Docker image
         with:
           image: inyaa/inyaa-sakura-nuxt
-          tag: latest
+          tags: latest
           registry: docker.io
           dockerfile: Dockerfile
           username: ${{ secrets.DOCKER_HUB_USERNAME }}
