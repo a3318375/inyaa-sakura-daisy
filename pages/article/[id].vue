@@ -49,7 +49,7 @@ useHead({
     <div id="mainContent" class="lg:grid lg:grid-cols-12 lg:gap-4 px-4 py-8">
       <div class="w-full lg:col-start-2 md:col-end-9 lg:pr-3">
         <div class="card w-full glass rounded-none static group">
-          <figure><img :src="data.cover" alt="car!"></figure>
+          <figure><img :src="`${data.cover}!inyaa`" alt="car!"></figure>
           <div class="card-body w-full absolute bottom-0 bg-neutral bg-opacity-60 text-white p-3 transition duration-500 translate-y-8 group-hover:translate-y-0">
             <h2 class="card-title block w-full">
               <a>{{ data.title }}</a>

@@ -85,21 +85,23 @@ useHead({
       <div id="mainContent" class="lg:grid lg:grid-cols-12 lg:gap-4 px-4 py-8">
         <div class="w-full lg:col-start-2 md:col-end-9 lg:pr-3">
           <div v-for="(item, index) in blogList" :key="index" class="grid card rounded-box">
-            <div class="card w-full h-4/5 glass static group">
-              <figure><img :src="item.cover" class="transform transition duration-700 group-hover:scale-110" alt="car!"></figure>
-              <div class="card-body w-full absolute bottom-0 bg-neutral bg-opacity-60 text-white p-3 transition duration-500 translate-y-8 group-hover:translate-y-0">
-                <h2 class="card-title block w-full">
-                  <a :href="`/article/${item.id}`">{{ item.title }}</a>
-                </h2>
-                <div class="text-xs">
-                  <span><div class="i-carbon-time text-sm mr-1 inline-block bg-base-500 w-3 h-3" />{{ nuxtApp.$dayjs(item.createTime).format('YYYY-MM-DD') }}</span>
-                  <span class="mx-2"><div class="i-carbon-view text-sm mr-1 inline-block bg-base-500 w-3 h-3" />{{ item.views }} 热度</span>
-                  <span class="mr-2"><div class="i-carbon-pending text-sm mr-1 inline-block bg-base-500 w-3 h-3" />{{ item.comments }} 条评论</span>
-                  <span><div class="i-carbon-open-panel-top text-sm mr-1 inline-block bg-base-500 w-3 h-3" />{{ item.type.name }}</span>
+            <a :href="`/article/${item.id}`">
+              <div class="card w-full h-4/5 glass static group">
+                <figure><img :src="`${item.cover}!inyaa`" class="transform transition duration-700 group-hover:scale-110" alt="car!"></figure>
+                <div class="card-body w-full absolute bottom-0 bg-neutral bg-opacity-60 text-white p-3 transition duration-500 translate-y-8 group-hover:translate-y-0">
+                  <h2 class="card-title block w-full">
+                    <a :href="`/article/${item.id}`">{{ item.title }}</a>
+                  </h2>
+                  <div class="text-xs">
+                    <span><div class="i-carbon-time text-sm mr-1 inline-block bg-base-500 w-3 h-3" />{{ nuxtApp.$dayjs(item.createTime).format('YYYY-MM-DD') }}</span>
+                    <span class="mx-2"><div class="i-carbon-view text-sm mr-1 inline-block bg-base-500 w-3 h-3" />{{ item.views }} 热度</span>
+                    <span class="mr-2"><div class="i-carbon-pending text-sm mr-1 inline-block bg-base-500 w-3 h-3" />{{ item.comments }} 条评论</span>
+                    <span><div class="i-carbon-open-panel-top text-sm mr-1 inline-block bg-base-500 w-3 h-3" />{{ item.type.name }}</span>
+                  </div>
+                  <p class="truncate ...">{{ item.summary }}</p>
                 </div>
-                <p class="truncate ...">{{ item.summary }}</p>
               </div>
-            </div>
+            </a>
           </div>
           <div class="flex items-center justify-between border-t border-gray-200 bg-white px-4 py-3 sm:px-6">
             <div class="flex flex-1 justify-between sm:hidden">
