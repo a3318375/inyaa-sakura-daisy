@@ -98,9 +98,7 @@ useHead({
             <div><div class="i-heroicons-bars-3-center-left-20-solid w-5 h-5 pt-1 inline-block" />目录</div>
             <div class="px-6 py-4" v-html="nuxtApp.$markit.topHtml" />
           </div>
-          <div class="sticky px-6 py-5 bg-primary-content opacity-80 shadow-md rounded-xl mt-5">
-            <div>最近文章</div>
-          </div>
+          <HotArticle />
         </div>
       </div>
     </div>

@@ -115,9 +115,7 @@ blog.value.url = imgData
           </div>
         </div>
         <div class="w-full" :class="[myInfoShow ? 'sticky top-5' : '']">
-          <div class="sticky px-6 py-5 bg-white shadow-md rounded-xl mt-5">
-            <div>最近文章</div>
-          </div>
+          <HotArticle />
         </div>
       </div>
     </div>
