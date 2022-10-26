@@ -19,11 +19,11 @@ jobs:
         run: yarn install
       - name: Build
         run: yarn build
-      - uses: mr-smithers-excellent/docker-build-push@v2
+      - uses: mr-smithers-excellent/docker-build-push@v5
         name: Build & push Docker image
         with:
           image: inyaa/inyaa-sakura-nuxt
-          tags: latest
+          tag: latest
           registry: docker.io
           dockerfile: Dockerfile
           username: ${{ secrets.DOCKER_HUB_USERNAME }}
