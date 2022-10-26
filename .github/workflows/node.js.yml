@@ -19,12 +19,12 @@ jobs:
         run: yarn install
       - name: Build
         run: yarn build
-      - uses: mr-smithers-excellent/docker-build-push@v5
+      - uses: mr-smithers-excellent/docker-build-push@v2
         name: Build & push Docker image
         with:
           image: inyaa/inyaa-sakura-nuxt
           tags: latest
-          registry: ccr.ccs.tencentyun.com
+          registry: docker.io
           dockerfile: Dockerfile
           username: ${{ secrets.DOCKER_HUB_USERNAME }}
           password: ${{ secrets.DOCKER_HUB_PASSWORD }}
@@ -39,4 +39,4 @@ jobs:
             docker stop $(docker ps -a | grep "inyaa-sakura-nuxt" | awk '{print $1}')
             docker rm -f $(docker ps -a | grep inyaa-sakura-nuxt | awk '{print $1}')
             docker rmi $(docker images | grep inyaa-sakura-nuxt | awk '{print $3}')
-            docker run -d -p 3000:3000 --name inyaa-sakura-nuxt --network inyaa --network-alias inyaa-sakura-nuxt ccr.ccs.tencentyun.com/inyaa/inyaa-sakura-nuxt/inyaa/inyaa-sakura-nuxt:latest
+            docker run -d -p 3000:3000 --name inyaa-sakura-nuxt --network inyaa --network-alias inyaa-sakura-nuxt inyaa-sakura-nuxt:latest
