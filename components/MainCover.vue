@@ -7,9 +7,9 @@ function toDwon() {
 
 <template>
   <div id="myCover" class="hero min-h-screen">
-    <div class="hero-content text-center text-neutral-content bg-white bg-opacity-60 rounded-full">
+    <div class="hero-content text-center bg-base-100 bg-opacity-60 rounded-full">
       <div class="max-w-md">
-        <p class="text-black">
+        <p class="text-neutral">
           欢迎来到瑶瑶小站
         </p>
       </div>

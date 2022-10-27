@@ -157,7 +157,7 @@ useHead({
   <div class="w-full h-screen grid overflow-hidden">
     <div id="pageContent" class="overflow-y-auto" @scroll="handleScroll">
       <img :class="[show ? 'fixed w-full h-full object-cover -z-999 bg-[url(https://media.inyaw.com/cover/14db2cf6e4b441368243b23722d212c9.png)] md:bg-[url(https://media.inyaw.com/cover/7037ade43b1e484eac903a111b7ea709.jpg)] bg-no-repeat bg-cover' : 'fixed filter blur-sm w-full h-full object-cover -z-999 bg-[url(https://media.inyaw.com/cover/14db2cf6e4b441368243b23722d212c9.png)] md:bg-[url(https://media.inyaw.com/cover/7037ade43b1e484eac903a111b7ea709.jpg)] bg-no-repeat bg-cover']">
-      <div class="navbar bg-opacity-60 sticky top-0 z-999 bg-white bg-opacity-70 transition duration-500" :class="[menuShow ? 'translate-y-0' : '-translate-y-16']">
+      <div class="hidden md:navbar bg-opacity-60 sticky top-0 z-999 bg-base-100 bg-opacity-70 transition duration-500" :class="[menuShow ? 'translate-y-0' : '-translate-y-16']">
         <div class="flex-1">
           <a class="btn btn-ghost normal-case text-xl group">
             <ruby>
@@ -208,6 +208,17 @@ useHead({
         <slot />
         <Footer />
       </main>
+      <div class="md:hidden btm-nav bg-base-100 bg-opacity-70">
+        <button>
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" /></svg>
+        </button>
+        <button class="active">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+        </button>
+        <button>
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" /></svg>
+        </button>
+      </div>
     </div>
   </div>
 </template>

@@ -59,7 +59,7 @@ blog.value.url = imgData
   <div>
     <div id="mainContent" class="lg:grid lg:grid-cols-12 lg:gap-4 px-4 py-8">
       <div class="w-full lg:col-start-2 md:col-end-9 lg:pr-3">
-        <div class="bg-white shadow-md">
+        <div class="bg-base-100 shadow-md">
           <ol class="border-l-2 border-blue-600">
             <li v-for="(item, index) in data" :key="index">
               <div class="flex flex-start items-center">
@@ -89,7 +89,7 @@ blog.value.url = imgData
         </div>
       </div>
       <div class="hidden lg:block lg:col-start-9 lg:col-end-12 lg:pl-0.75">
-        <div id="myInfo" class="w-full px-6 py-5 bg-white shadow-md rounded-xl">
+        <div id="myInfo" class="w-full px-6 py-5 bg-base-100 shadow-md rounded-xl">
           <div class="flex justify-center">
             <img src="https://media.inyaw.com/icon/avatar.png!inyaa" class="rounded-full w-32">
           </div>
