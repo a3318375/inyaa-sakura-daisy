@@ -16,11 +16,11 @@ export default defineNuxtConfig({
       { src: 'https://media.inyaw.com/css/lv2d/live2dv3.min.js' },
     ],
     link: [
+      { rel: 'stylesheet', href: 'https://media.inyaw.com/css/APlayer/APlayer.min.css' },
     ],
   },
   css: [
     // CSS file in the project
     '@/assets/main.css',
-    '@/assets/Aplayer.min.css',
   ],
 })
