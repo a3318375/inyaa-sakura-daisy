@@ -154,6 +154,7 @@ const menuData = await useFetch('/menu/findMenuList', {
 useHead({
   link: [
     { rel: 'icon', href: 'https://media.inyaw.com/icon/favicon.ico' },
+    { rel: 'stylesheet', href: 'https://media.inyaw.com/css/APlayer/APlayer.min.css' },
   ],
 })
 </script>
