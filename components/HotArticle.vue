@@ -23,7 +23,7 @@ const data = await useFetch('/blog/web/list', {
 </script>
 
 <template>
-  <div class="sticky px-6 py-5 bg-primary-content opacity-80 shadow-md rounded-xl mt-5">
+  <div class="sticky px-6 py-5 bg-base-100 opacity-80 shadow-md rounded-xl mt-5">
     <div>最近文章</div>
     <div v-for="(item, index) in data" :key="index" class="flex pt-2">
       <a :href="`/article/${item.id}`">

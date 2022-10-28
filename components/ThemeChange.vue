@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { themeChange } from 'theme-change'
 import { onMounted } from 'vue'
-const { theme, updateThemeShow, updateThemeHide } = useTheme()
+const { setTheme } = useTheme()
 onMounted(() => {
   themeChange(false)
 })
@@ -128,11 +128,7 @@ const themes = [
   },
 ]
 function updateTheme(val) {
-  if (val === 0)
-    updateThemeHide()
-
-  else
-    updateThemeShow()
+  setTheme(val)
 }
 </script>
 
@@ -148,11 +144,11 @@ function updateTheme(val) {
         <div class="grid grid-cols-1 gap-3 p-3" tabindex="0">
           <div
             v-for="(theme, index) in themes"
-            :key="theme.id"
+            :key="index"
             class="overflow-hidden rounded-lg outline outline-2 outline-offset-2 outline-base-content"
             :data-set-theme="theme.id"
             data-act-class="outline"
-            @click="updateTheme(index)"
+            @click="updateTheme(theme.id)"
           >
             <div
               :data-theme="theme.id"

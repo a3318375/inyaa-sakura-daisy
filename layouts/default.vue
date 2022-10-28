@@ -3,6 +3,7 @@ const { show, updateShow, updateHide } = useScroll()
 const { menuShow, updateMenuShow, updateMenuHide } = useMenuShow()
 const { myInfoShow, updateMyInfoShow, updateMyInfoHide } = useMyInfoShow()
 const route = useRoute()
+const { theme } = useTheme()
 const nowScroll = ref(0)
 
 function handleScroll() {
@@ -23,21 +24,24 @@ function handleScroll() {
   const myTop = document.getElementById('pageContent').scrollHeight
   if (scrollTop > myTop / 10) {
     updateHide()
-    document.getElementsByClassName('aplayer-title')[0].style.color = '#666'
-    document.getElementsByClassName('aplayer-author')[0].style.color = '#666'
-    document.getElementsByClassName('aplayer-time-narrow')[0].style.color = '#666'
-    document.getElementsByClassName('aplayer-icon-volume-down')[0].firstChild.firstChild.style.fill = '#666'
   }
   else {
     updateShow()
-    document.getElementsByClassName('aplayer-title')[0].style.color = '#fff'
-    document.getElementsByClassName('aplayer-author')[0].style.color = '#fff'
-    document.getElementsByClassName('aplayer-time-narrow')[0].style.color = '#fff'
-    document.getElementsByClassName('aplayer-icon-volume-down')[0].firstChild.firstChild.style.fill = '#fff'
   }
 }
 onMounted(async () => {
   initAudio()
+  new l2dViewer({
+    el: document.getElementById('L2dCanvas'), // 要添加Live2d的元素, 支持dom选择器和jq选择器
+    basePath: 'https://www.inyaw.com/lv2d/live2d/model', // 模型根目录
+    width: 1000,
+    height: 800,
+    modelName: 'xuefeng_3', // 模型名称
+    sounds: [ // 触摸播放声音
+      'sounds/demo.mp3', // 相对路径是相对于模型文件夹
+      'https://cdn.jsdelivr.net/npm/live2dv3@latest/assets/biaoqiang_3/sounds/demo.mp3' // 也可以是网址
+    ]
+  })
 })
 function initAudio() {
   // 创建一个音乐播放器实例，并挂载到DOM上，同时进行相关配置
@@ -91,6 +95,7 @@ if (!user.value && token.value) {
       Authorization: token.value,
     },
   }).then((r) => {
+    console.log(111, r)
     if (!r)
       return {}
 
@@ -156,6 +161,7 @@ useHead({
 <template>
   <div class="w-full h-screen grid overflow-hidden">
     <div id="pageContent" class="overflow-y-auto" @scroll="handleScroll">
+      <div class="Canvas hidden md:block" style="position: fixed; opacity: 1; right: -250px; bottom: -90px; pointer-events: none;" id="L2dCanvas"></div>
       <img :class="[show ? 'fixed w-full h-full object-cover -z-999 bg-[url(https://media.inyaw.com/cover/14db2cf6e4b441368243b23722d212c9.png)] md:bg-[url(https://media.inyaw.com/cover/7037ade43b1e484eac903a111b7ea709.jpg)] bg-no-repeat bg-cover' : 'fixed filter blur-sm w-full h-full object-cover -z-999 bg-[url(https://media.inyaw.com/cover/14db2cf6e4b441368243b23722d212c9.png)] md:bg-[url(https://media.inyaw.com/cover/7037ade43b1e484eac903a111b7ea709.jpg)] bg-no-repeat bg-cover']">
       <div class="hidden md:navbar bg-opacity-60 sticky top-0 z-999 bg-base-100 bg-opacity-70 transition duration-500" :class="[menuShow ? 'translate-y-0' : '-translate-y-16']">
         <div class="flex-1">
@@ -181,19 +187,21 @@ useHead({
         <div class="flex-none hidden lg:block">
           <ThemeChange />
         </div>
-        <div class="flex-none gap-2">
+        <div class="flex-none hidden lg:block">
           <button class="btn btn-ghost btn-circle">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path
-                stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                  stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
               />
             </svg>
           </button>
+        </div>
+        <div class="flex-none hidden lg:block">
           <div class="dropdown dropdown-end">
             <label tabindex="0" class="btn btn-ghost btn-circle avatar">
               <div v-if="!user" class="i-carbon-user-avatar w-6 h-6" />
-              <img v-else :src="user.inyaaSysUserDetail.avatar" class="w-6 h-6">
+              <img v-else :src="user.inyaaSysUserDetail.avatar" class="rounded-full w-6 h-6">
             </label>
             <ul tabindex="0" class="mt-3 p-2 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-52 text-accent-content">
               <li v-for="(navItem, index) in userNav" :key="index">

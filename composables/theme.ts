@@ -1,16 +1,12 @@
 export function useTheme() {
-  const theme = useState('theme', () => false)
+  const theme = useState('theme', () => '')
 
-  function updateThemeShow() {
-    theme.value = true
-  }
-  function updateThemeHide() {
-    theme.value = false
+  function setTheme(val: string) {
+    theme.value = val
   }
 
   return {
     theme,
-    updateThemeShow,
-    updateThemeHide,
+    setTheme
   }
 }

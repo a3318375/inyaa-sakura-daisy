@@ -146,8 +146,8 @@ toNext(1)
           </div>
         </div>
       </div>
-      <div class="col-start-18 col-end-23 pl-0.75">
-        <div class="w-full px-6 py-5 bg-white shadow-md rounded-xl">
+      <div class="col-start-18 col-end-23 pl-0.75">1
+        <div class="w-full px-6 py-5 bg-base-100 shadow-md rounded-xl">
           <div class="flex justify-center">
             <img src="https://media.inyaw.com/icon/avatar.png!inyaa" class="rounded-full w-32" />
           </div>

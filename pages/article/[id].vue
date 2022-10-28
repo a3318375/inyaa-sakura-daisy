@@ -1,8 +1,8 @@
 <script setup>
-const { blogNum } = useBlogNum()
 const nuxtApp = useNuxtApp()
 const route = useRoute()
 const { myInfoShow } = useMyInfoShow()
+const user = useCookie('TOKEN_USER')
 const blog = ref({
   type: 1,
   url: 'background-image: url(https://media.inyaw.com/cover/7037ade43b1e484eac903a111b7ea709.jpg!inyaa)',
@@ -63,41 +63,29 @@ useHead({
             <p class="truncate ...">{{ data.summary }}</p>
           </div>
         </div>
-        <div class="bg-primary-content opacity-80 shadow-md">
+        <div class="bg-base-100 opacity-80 shadow-md">
           <article class="prose max-w-none p-4" v-html="data.article ? nuxtApp.$markit.render(data.article.context) : '' " />
+        </div>
+        <div class="pt-5 hidden">
+          <div class="card w-full rounded-none bg-base-100 opacity-80 shadow-xl lg:grid lg:grid-cols-12">
+            <div class="col-span-2">321</div>
+            <div class="col-span-10">321</div>
+          </div>
+        </div>
+        <div v-if="user" class="pt-5">
+          <div class="card w-full rounded-none bg-base-100 opacity-80 shadow-xl">
+            <div class="card-body">
+              <textarea class="textarea textarea-bordered" placeholder="还在测试中"></textarea>
+              <div class="card-actions justify-end">
+                <button class="btn btn-primary">发布</button>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
       <div class="hidden lg:block lg:col-start-9 lg:col-end-12 lg:pl-0.75">
-        <div id="myInfo" class="w-full px-6 py-5 bg-primary-content opacity-80 shadow-md rounded-xl">
-          <div class="flex justify-center">
-            <img src="https://media.inyaw.com/icon/avatar.png!inyaa" class="rounded-full w-32">
-          </div>
-          <div class="flex justify-center text-2xl">
-            四埜宫瑶
-          </div>
-          <div class="flex justify-center">
-            一个无名小卒罢了
-          </div>
-          <div class="flex justify-center text-center">
-            <div class="w-1/3">
-              <div>文章</div>
-              <div>{{ blogNum.articleNum }}</div>
-            </div>
-            <div class="w-1/3">
-              <div>标签</div>
-              <div>{{ blogNum.tagNum }}</div>
-            </div>
-            <div class="w-1/3">
-              <div>分类</div>
-              <div>{{ blogNum.typeNum }}</div>
-            </div>
-          </div>
-        </div>
+        <MyInfo />
         <div class="w-full" :class="[myInfoShow ? 'sticky top-5' : '']">
-          <div class="px-6 py-5 bg-primary-content opacity-80 shadow-md rounded-xl mt-5">
-            <div><div class="i-heroicons-bars-3-center-left-20-solid w-5 h-5 pt-1 inline-block" />目录</div>
-            <div class="px-6 py-4" v-html="nuxtApp.$markit.topHtml" />
-          </div>
           <HotArticle />
         </div>
       </div>
