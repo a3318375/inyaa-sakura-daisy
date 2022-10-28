@@ -192,7 +192,8 @@ useHead({
           </button>
           <div class="dropdown dropdown-end">
             <label tabindex="0" class="btn btn-ghost btn-circle avatar">
-              <div class="i-carbon-user-avatar w-6 h-6" />
+              <div v-if="!user" class="i-carbon-user-avatar w-6 h-6" />
+              <img v-else :src="user.inyaaSysUserDetail.avatar" class="w-6 h-6">
             </label>
             <ul tabindex="0" class="mt-3 p-2 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-52 text-accent-content">
               <li v-for="(navItem, index) in userNav" :key="index">

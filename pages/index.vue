@@ -178,7 +178,7 @@ useHead({
             </div>
           </div>
           <div class="w-full" :class="[myInfoShow ? 'sticky top-5' : '']">
-           <HotArticle />
+            <HotArticle />
           </div>
         </div>
       </div>
