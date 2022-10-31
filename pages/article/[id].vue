@@ -66,10 +66,18 @@ useHead({
         <div class="bg-base-100 opacity-80 shadow-md">
           <article class="prose max-w-none p-4" v-html="data.article ? nuxtApp.$markit.render(data.article.context) : '' " />
         </div>
-        <div class="pt-5 hidden">
-          <div class="card w-full rounded-none bg-base-100 opacity-80 shadow-xl lg:grid lg:grid-cols-12">
-            <div class="col-span-2">321</div>
-            <div class="col-span-10">321</div>
+        <div class="pt-5">
+          <div class="card w-full rounded-none bg-base-100 opacity-80 shadow-xl lg:grid lg:grid-cols-12 px-5 py-4">
+            <div class="col-span-2">
+              <img src="https://media.inyaw.com/icon/avatar.png!inyaa" class="w-12 rounded-full">
+            </div>
+            <div class="col-span-10">
+              <div class="flex flex-col">
+                <div class="font-bold">调试评论人</div>
+                <div class="text-sm opacity-70">2021-10-06 16:37</div>
+                <div class="text-sm">目前无法评论，只是在调试样式</div>
+              </div>
+            </div>
           </div>
         </div>
         <div v-if="user" class="pt-5">
